@@ -4,9 +4,7 @@
  * Template
  */
 
-function Template() {}
-
-Template.prototype = {
+const template = {
   getTemplate(templateId) {
     const selector = `[data-template-html = "${templateId}"]`;
     return document.querySelector(selector).innerHTML;
@@ -43,8 +41,8 @@ Template.prototype = {
       // ==> 결과값 [ "{{#each foo}}<p>{{this}}</p>{{/each}}", "{{#each doo}}<p>{{this}}</p>{{/each}}" ]
 
     eachArr.forEach((eachStr) => {
-      const keyAndTemplate = eachStr.match(regexEachWithGroup); 
-        // ==> 결과값 [ "{{#each foo}}<p>{{this}}</p>{{/each}}", " foo", "<p>{{this}}</p>" ] 
+      const keyAndTemplate = eachStr.match(regexEachWithGroup);
+        // ==> 결과값 [ "{{#each foo}}<p>{{this}}</p>{{/each}}", " foo", "<p>{{this}}</p>" ]
       const key = keyAndTemplate[1].trim();
       const template = keyAndTemplate[2].trim();
       const eachDataArr = data[key];
@@ -75,9 +73,9 @@ Template.prototype = {
 
       if (hasIfData) {
         ifHtml = template.replace(/{{this}}/g, ifData);
-        html = html.replace(ifStr, ifHtml);  
+        html = html.replace(ifStr, ifHtml);
       } else {
-        html = html.replace(ifStr, '');                
+        html = html.replace(ifStr, '');
       }
     });
 

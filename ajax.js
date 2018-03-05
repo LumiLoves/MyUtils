@@ -4,13 +4,11 @@
  * Ajax
  */
 
-function Ajax() {}
-
-Ajax.prototype = {
+const ajax = {
   request({ url, method, data, reqContentType, success, error, isAsync }) {
     const xhr = new XMLHttpRequest();
     method = method.toUpperCase();
-    data = util.type.isObject(data)? JSON.stringify(data): null; 
+    data = util.type.isObject(data)? JSON.stringify(data): null;
     isAsync = (isAsync)? isAsync : true;
 
     xhr.open(method, url, isAsync);
@@ -38,11 +36,11 @@ Ajax.prototype = {
       }
 
       // 성공 콜백
-      success && success(resData);      
+      success && success(resData);
     };
 
     xhr.send(data);
-  },
+  }
   getData({ url, data, success, error, isAsync }) {
     this.request({
       url, // 필수
@@ -52,7 +50,7 @@ Ajax.prototype = {
       error,
       isAsync
     });
-  },
+  }
   postJSON({ url, data, success, error, isAsync }) {
     this.request({
       url,  // 필수
@@ -71,7 +69,6 @@ Ajax.prototype = {
 };
 
 
-
 /**
 
 사용측 코드
@@ -86,8 +83,6 @@ oAjax.getData({
     // .....
   }
 });
-
-or
 
 oAjax.getData(actionUrl.bestDish, { "a": 1, "b": 2 }, () => {
   // .....
