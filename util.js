@@ -6,8 +6,8 @@
 
 const util = {
   array: {
-    trim: function(arr) {
-      if (toString.call(arr) !== '[object Array]') { return false; }
+    trim(arr) {
+      if (!util.type.isArray(arr)) { return false; }
 
       if (arr[0] === ' ') { arr.shift(); }
       if (arr[arr.length - 1] === ' ') { arr.pop(); }
@@ -21,7 +21,7 @@ const util = {
       return toString.call(data) === '[object String]';
     },
     isArray(data) {
-      return (Array.isArray !== undefined)? 
+      return (Array.isArray !== undefined)?
         Array.isArray(data) : (toString.call(data) === '[object Array]');
     },
     isObject(data) {
@@ -33,7 +33,7 @@ const util = {
       const hasSelector = selector? 'hasSelector' : 'noSelector';
       const handler = {
         noSelector(elem, i) {
-          elem.index = i;        
+          elem.index = i;
         },
         hasSelector(elem, i) {
           elem.querySelector(selector).index = i;
