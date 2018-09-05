@@ -28,6 +28,7 @@ const util = {
       return toString.call(data) === '[object Object]';
     }
   },
+  
   dom: {
     setIndex(nodeList, selector) {
       const hasSelector = selector? 'hasSelector' : 'noSelector';
@@ -43,9 +44,26 @@ const util = {
       nodeList.forEach(handler);
     }
   },
+  
   number: {
     random(min, max) {
       return min + Math.floor(Math.random() * (max + 1));
+    }
+  },
+  
+  createPromiseTimer(delay) {
+    let timerId = null;
+    const promise = new Promise((resolve) => {
+      timerId = setTimeout(() => {
+        resolve();
+      }, delay);
+    });
+
+    return {
+      promise,
+      cancel() {
+        clearTimeout(timerId);
+      }
     }
   }
 };
